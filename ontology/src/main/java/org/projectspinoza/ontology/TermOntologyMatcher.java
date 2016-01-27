@@ -18,6 +18,7 @@ public class TermOntologyMatcher {
     private String tweetsPath;
     private String ontologiesPath;
     private Set<String> conceptTweetTags = new HashSet<String>();
+    private Map<String, Object> tags = new HashMap<String, Object>();
 
     public String getTweetsPath() {
         return tweetsPath;
@@ -43,6 +44,14 @@ public class TermOntologyMatcher {
         this.ontologiesPath = ontologiesPath;
     }
 
+    public Map<String, Object> getTags() {
+        return tags;
+    }
+
+    public void setTags(Map<String, Object> tags) {
+        this.tags = tags;
+    }
+
     public TermOntologyMatcher() {
     }
 
@@ -57,7 +66,11 @@ public class TermOntologyMatcher {
         List<Term> earlyMatchedTerms = (List<Term>) resultTerms.get("matched");
         List<String> unMatchedTerms = (List<String>) resultTerms.get("unMatched");
         List<Term> hieraricalTerms = finalHierarchy(earlyMatchedTerms);
-        
+        /***
+         * Preparing Map<String,Object> from List<Term> to be visualize.
+         * **/
+       this.setTags(visualizeMap(hieraricalTerms));
+        /** End **/
         return printMatchedTerms(hieraricalTerms, unMatchedTerms);
     }
 
@@ -166,5 +179,19 @@ public class TermOntologyMatcher {
             percentage = ((matched * 100.0F) / total);
         }
          return String.format("%.2f",percentage);
+    }
+    
+    /// Extra Fuction for creating map to be visualize
+    
+    public Map<String, Object> visualizeMap(List<Term> terms){
+        Map<String, Object> tags = new HashMap<String, Object>();
+        for(Term term : terms){
+            int[] freqs = new int[2];
+            String name = term.getTerm();
+            freqs[0] = term.getFrequency();
+            freqs[1] = term.getOverAllFrequency();
+            tags.put(name, freqs);
+        }
+        return tags;
     }
 }

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.projectspinoza.concept.TagConceptMatcher;
 import org.projectspinoza.concept.models.TagConceptNet;
+import org.projectspinoza.javaFX.Chart;
 
 public class Main {
     private static Logger log = LogManager.getRootLogger();
@@ -30,5 +31,7 @@ public class Main {
         List<TagConceptNet> concepts = new TagConceptMatcher().getConcepts(tweetTags);
         OntoConceptResultGenerator.generatFile("conceptNet_result", concepts);
         log.info("Done with conceptNet!");
+ //       new Chart().setData_map(termOntologyMatcher.getTags());
+        Chart.launch(args);
     }
 }

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.projectspinoza</groupId>
-		<artifactId>onto_concept-graph</artifactId>
+		<artifactId>onto_concept</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
@@ -69,11 +69,11 @@
 			<artifactId>concept</artifactId>
 			<version>v1.0</version>
 		</dependency>
-		<depecdency>
+		<dependency>
 			<groupId>org.projectspinoza.javaFX</groupId>
 			<artifactId>javaFX</artifactId>
 			<version>v1.0</version>
-		</depecdency>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

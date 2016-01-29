@@ -183,15 +183,17 @@ public class TermOntologyMatcher {
     
     /// Extra Fuction for creating map to be visualize
     
-    public Map<String, Object> visualizeMap(List<Term> terms){
-        Map<String, Object> tags = new HashMap<String, Object>();
-        for(Term term : terms){
-            int[] freqs = new int[2];
-            String name = term.getTerm();
-            freqs[0] = term.getFrequency();
-            freqs[1] = term.getOverAllFrequency();
-            tags.put(name, freqs);
-        }
-        return tags;
-    }
+	public Map<String, Object> visualizeMap(List<Term> terms) {
+		Map<String, Object> tags = new HashMap<String, Object>();
+		for (Term term : terms) {
+			for (Term child : term.getChilds()) {
+				int[] freqs = new int[2];
+				String name = child.getTerm();
+				freqs[0] = child.getOverAllFrequency();
+				freqs[1] = child.getFrequency();
+				tags.put(name, freqs);
+			}
+		}
+		return tags;
+	}
 }

@@ -45,7 +45,6 @@ public class TreeGraph {
 	public static List<Term> getOntoData() {
 		return ontoData;
 	}
-
 	public static void setOntoData(List<Term> ontoData) {
 		TreeGraph.ontoData = ontoData;
 	}

@@ -10,3 +10,11 @@ onotlogy-conceptNet visualization
 <br>
 <br>
 ![Pie screenshot](images/pie.jpg)
+<br>
+<br>
+<br>
+<hr>
+<br>
+<br>
+<br>
+![Tree screenshot](images/tree.jpg)

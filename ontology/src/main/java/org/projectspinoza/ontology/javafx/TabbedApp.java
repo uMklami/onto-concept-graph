@@ -18,7 +18,7 @@ public class TabbedApp extends Application {
     public void init() throws Exception {
         // Prepare tab pane with set of tabs
         BorderPane borderPane = new BorderPane();
-        tabPane.setPrefSize(900, 700);
+        tabPane.setPrefSize(1000, 650);
         tabPane.setSide(Side.TOP);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         BubbleChart<Number, Number> bubbleChart = new BubbleGraph().start();

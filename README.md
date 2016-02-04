@@ -17,4 +17,4 @@ onotlogy-conceptNet visualization
 <br>
 <br>
 <br>
-![Tree screenshot](images/tree.jpg)
+![Tree screenshot](images/tree.JPG)

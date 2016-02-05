@@ -18,13 +18,12 @@ public class TabbedApp extends Application {
     public void init() throws Exception {
         // Prepare tab pane with set of tabs
         BorderPane borderPane = new BorderPane();
-        tabPane.setPrefSize(1000, 650);
+        //tabPane.setPrefSize(1000,650);
         tabPane.setSide(Side.TOP);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         BubbleChart<Number, Number> bubbleChart = new BubbleGraph().start();
         Group pieChart = new PieGraph().start();
         SwingNode treeGraph = new TreeGraph().start();
-        
         /** tab for bubble graph **/
         final Tab bubble = new Tab("Bubble Chart");
         bubble.setId("1");
@@ -46,10 +45,13 @@ public class TabbedApp extends Application {
         tabPane.getTabs().addAll(bubble,pie,tree);
         borderPane.setCenter(tabPane);
         root.getChildren().addAll(borderPane);
+        
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+    	//primaryStage.setMinHeight(650);
+    	//primaryStage.setMinWidth(1000);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

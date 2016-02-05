@@ -22,7 +22,6 @@ import org.projectspinoza.ontology.javafx.models.JEdge;
 import org.projectspinoza.ontology.javafx.models.JNode;
 import org.projectspinoza.ontology.util.Term;
 
-import edu.uci.ics.jung.algorithms.layout.RadialTreeLayout;
 import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.graph.DelegateForest;
 import edu.uci.ics.jung.graph.Forest;
@@ -36,7 +35,6 @@ import edu.uci.ics.jung.visualization.control.ModalGraphMouse;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.decorators.EllipseVertexShapeTransformer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
-import edu.uci.ics.jung.visualization.subLayout.TreeCollapser;
 
 public class TreeGraph {
 
@@ -61,8 +59,8 @@ public class TreeGraph {
 	VisualizationViewer<JNode, JEdge> vv;
 	VisualizationServer.Paintable rings;
 	TreeLayout<JNode, JEdge> layout;
-	TreeCollapser collapser;
-	RadialTreeLayout<JNode, JEdge> radialLayout;
+//	TreeCollapser collapser;
+//	RadialTreeLayout<JNode, JEdge> radialLayout;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public TreeGraph() {
@@ -72,9 +70,9 @@ public class TreeGraph {
 		addData();
 
 		layout = new TreeLayout<JNode, JEdge>(graph);
-		
+	    
 		vv = new VisualizationViewer<JNode, JEdge>(layout, new Dimension(
-				800, 700));
+				1500, 700));
 		vv.setBackground(Color.white);
 		vv.getRenderContext().setEdgeShapeTransformer(new EdgeShape.Line());
 		vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
@@ -85,6 +83,7 @@ public class TreeGraph {
 				new ConstantTransformer(Color.lightGray));	
 		
 		panel = new GraphZoomScrollPane(vv);
+
 		final DefaultModalGraphMouse<?, ?> graphMouse = new DefaultModalGraphMouse();
 		vv.setGraphMouse(graphMouse);
 		graphMouse.setMode(ModalGraphMouse.Mode.TRANSFORMING);
@@ -108,10 +107,11 @@ public class TreeGraph {
 			if (v instanceof Graph) {
 				int size = ((Graph<?, ?>) v).getVertexCount();
 				if (size < 8) {
-					int sides = Math.max(size, 3);
+					int sides = Math.max(size, 4);
 					return factory.getRegularPolygon(v, sides);
 				} else {
 					return factory.getRegularStar(v, size);
+				//	return factory.getRoundRectangle(v);
 				}
 			}
 			return super.transform(v);
@@ -133,7 +133,7 @@ public class TreeGraph {
 
 		public Integer transform(V v) {
 			if (v instanceof Graph) {
-				return 20;
+				return 50;
 			}
 			return size;
 		}
@@ -145,11 +145,12 @@ public class TreeGraph {
 	 * @param data
 	 */
 	public void addData(){
-		JNode root = new JNode("ontology");
-		graph.addVertex(root);
+//		JNode root = new JNode("ontology");
+//		graph.addVertex(root);
 		for (Term term : ontoData) {
 			JNode jchild = new JNode(term.getTerm());
-			graph.addEdge(new JEdge(), root, jchild , EdgeType.DIRECTED);
+			graph.addVertex(jchild);
+//			graph.addEdge(new JEdge(), root, jchild , EdgeType.DIRECTED);
 			if (term.getChilds() != null) {
 				for (Term child : term.getChilds()) {
 					JNode jsubchild = new JNode(child.getTerm());

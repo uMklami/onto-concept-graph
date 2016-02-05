@@ -65,13 +65,15 @@ public class TermOntologyMatcher {
         Map<String, Object> resultTerms = matchTerms(tweetsPath, ontologiesPath);
         List<Term> earlyMatchedTerms = (List<Term>) resultTerms.get("matched");
         List<String> unMatchedTerms = (List<String>) resultTerms.get("unMatched");
-        List<Term> hieraricalTerms = finalHierarchy(earlyMatchedTerms);
+        List<Term> hierarical = finalHierarchy(earlyMatchedTerms);
+ //       List<Term> hieraricalTerms = finalHierarchy(hierarical);
+        
         /***
          * Preparing Map<String,Object> from List<Term> to be visualize.
          * **/
-       this.setTags(visualizeMap(hieraricalTerms));
+       this.setTags(visualizeMap(hierarical));
         /** End **/
-        return printMatchedTerms(hieraricalTerms, unMatchedTerms);
+        return printMatchedTerms(hierarical, unMatchedTerms);
     }
 
     public Map<String, Object> matchTerms(String tweeetsfile,String ontologiesfile) {
@@ -148,9 +150,18 @@ public class TermOntologyMatcher {
                 if (k != i) {
                     Term nextRelation = matchedTerms.get(k);
                     for (int j = 0; j < nextRelation.getChilds().size(); j++) {
+                    	Term subChild =  nextRelation.getChilds().get(j);
                         if (parent.equals(nextRelation.getChilds().get(j).getTerm().toLowerCase())) {
-                            nextRelation.getChilds().get(j).setChilds(relation.getChilds());
+//                            nextRelation.getChilds().get(j).setChilds(relation.getChilds());
+                            nextRelation.getChilds().get(j).addChilds(relation.getChilds());
                             matchedTerms.remove(relation);
+                        }else if(subChild.getChilds() != null){
+                        	for(int l = 0; l < subChild.getChilds().size(); l++)
+                        	 if(parent.equals(subChild.getChilds().get(l).getTerm().toLowerCase())){
+//                        		 subChild.getChilds().get(l).setChilds(relation.getChilds());
+                        		 subChild.getChilds().get(l).addChilds(relation.getChilds());
+                        		 matchedTerms.remove(relation);
+                        	 }
                         }
                     }
                 }

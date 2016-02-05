@@ -100,6 +100,12 @@ public class Term {
             childs.add(child);
         }
     }
+    
+    public void addChilds(List<Term> childs){
+    	for(Term child : childs){
+    		addChild(child);
+    	}
+    }
 
     public boolean contains(Term child) {
         for (Term oldChild : childs) {

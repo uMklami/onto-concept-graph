@@ -7,8 +7,6 @@ import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.projectspinoza.concept.TagConceptMatcher;
-import org.projectspinoza.concept.models.TagConceptNet;
 import org.projectspinoza.ontology.javafx.JavaFX;
 import org.projectspinoza.ontology.javafx.TabbedApp;
 import org.projectspinoza.ontology.util.Term;
@@ -37,9 +35,9 @@ public class Main {
         TabbedApp.launch(TabbedApp.class); 
         
         // starting Concept processing...
-        log.info("Initializing conceptNet...");
-        List<TagConceptNet> concepts = new TagConceptMatcher().getConcepts(tweetTags,null);
-        OntoConceptResultGenerator.generatFile("conceptNet_result", concepts);
-        log.info("Done with conceptNet!");   
+//        log.info("Initializing conceptNet...");
+//        List<TagConceptNet> concepts = new TagConceptMatcher().getConcepts(tweetTags,null);
+//        OntoConceptResultGenerator.generatFile("conceptNet_result", concepts);
+//        log.info("Done with conceptNet!");   
     }
 }
